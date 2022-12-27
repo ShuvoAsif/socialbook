@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const NavBar = () => {
+
+    const { user, logOut } = useContext(AuthContext);
+
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => console.log(err));
+    }
+
+
+
+
     return (
         <div>
 
@@ -14,10 +28,20 @@ const NavBar = () => {
                         <Link to='/' className='btn mr-5'>Home</Link>
                     </div>
                     <div className="form-control">
-                        <Link to='/about' className='btn mr-5'>About Me</Link>
+                        <Link to='/media' className='btn mr-5'>Media</Link>
                     </div>
                     <div className="form-control">
-                        <Link to='/login' className='btn mr-5'>Log In</Link>
+                        <Link to='/about' className='btn mr-5'>About</Link>
+                    </div>
+                    <div className="form-control">
+                        <Link to='/login' className='mr-5'>
+                            {
+                                user ?
+                                    <li className="btn" onClick={handleLogOut}><Link to='/login'>Log out</Link></li>
+                                    :
+                                    <li className="btn"><Link to='/login'>Log in</Link></li>
+                            }
+                        </Link>
                     </div>
                 </div>
                 <div className="dropdown dropdown-end">
@@ -26,8 +50,8 @@ const NavBar = () => {
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li> <Link to='/' className='btn mr-5'>Home</Link></li>
-                        <li> <Link to='/blog' className='btn mr-5'>Blog</Link></li>
-                        <li> <Link to='/about' className='btn mr-5'>About Me</Link></li>
+                        <li> <Link to='/media' className='btn mr-5'>Media</Link></li>
+                        <li> <Link to='/about' className='btn mr-5'>About</Link></li>
                     </ul>
                 </div>
                 <div className="mr-5">
