@@ -35,7 +35,7 @@ const Addpost = () => {
 
     const savePost = (caption, image) => {
         const user = { caption, image };
-        fetch('http://localhost:5000/user', {
+        fetch('http://localhost:5000/post', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -49,7 +49,7 @@ const Addpost = () => {
     }
     return (
         <div>
-            <div className='h-[800px] flex justify-center items-center'>
+            <div className='h-[300px] flex justify-center items-center'>
                 <div className='w-96 p-7'>
                     <h2 className='text-xl text-center'>Add A Post</h2>
                     <form onSubmit={handleSubmit(handlePost)}>
@@ -60,12 +60,12 @@ const Addpost = () => {
                                 className="input input-bordered w-full max-w-xs" />
                             {errors.email && <p className='text-red-700'>{errors.email?.message}</p>}
                         </div>
-                        <div className="form-control w-full max-w-xs">
+                        <div className="form-control w-full max-w-xs pb-3">
                             <label className="label"> <span className="label-text">Photo</span></label>
                             <input type="file" {...register("image")} className="input input-bordered w-full max-w-xs" />
                             {errors.img && <p className='text-red-500'>{errors.img.message}</p>}
                         </div>
-                        <input className='btn w-full' value="Login" type="submit" />
+                        <input className='btn w-full' value="Post" type="submit" />
                         <div>
                             {Error && <p className='text-red-700'>{Error}</p>}
                         </div>
