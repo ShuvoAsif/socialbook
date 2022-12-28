@@ -64,7 +64,7 @@ const Signup = () => {
             .then(imgData => {
                 if (imgData.success) {
                     console.log(imgData.data.url);
-                    saveUser(data.name, data.email, imgData.data.url);
+                    saveUser(data.name, data.university, data.address, data.email, imgData.data.url);
                 }
             })
         console.log(data);
@@ -91,9 +91,9 @@ const Signup = () => {
     }
 
 
-    const saveUser = (name, email, image) => {
-        const user = { name, email, image };
-        fetch('', {
+    const saveUser = (name, university, address, email, image) => {
+        const user = { name, university, address, email, image };
+        fetch('http://localhost:5000/user', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -111,7 +111,7 @@ const Signup = () => {
 
     return (
         <div>
-            <div className='h-[800px] flex justify-center items-center'>
+            <div className='h-[700px] flex justify-center items-center'>
                 <div className='w-96 p-7'>
                     <h2 className='text-xl text-center'>Sign Up</h2>
                     <form onSubmit={handleSubmit(handleSignUp)}>
@@ -119,6 +119,20 @@ const Signup = () => {
                             <label className="label"> <span className="label-text">Name</span></label>
                             <input type="text" {...register("name", {
                                 required: "Name is Required"
+                            })} className="input input-bordered w-full max-w-xs" />
+                            {errors.name && <p className='text-red-700'>{errors.name.message}</p>}
+                        </div>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label"> <span className="label-text">University</span></label>
+                            <input type="text" {...register("university", {
+                                required: "University is Required"
+                            })} className="input input-bordered w-full max-w-xs" />
+                            {errors.name && <p className='text-red-700'>{errors.name.message}</p>}
+                        </div>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label"> <span className="label-text">Address</span></label>
+                            <input type="text" {...register("address", {
+                                required: "Address is Required"
                             })} className="input input-bordered w-full max-w-xs" />
                             {errors.name && <p className='text-red-700'>{errors.name.message}</p>}
                         </div>
