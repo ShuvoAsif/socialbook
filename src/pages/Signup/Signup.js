@@ -91,7 +91,7 @@ const Signup = () => {
 
     const saveUser = (name, university, address, email, image) => {
         const user = { name, university, address, email, image };
-        fetch('http://localhost:5000/user', {
+        fetch('https://socialbook-server.vercel.app/user', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

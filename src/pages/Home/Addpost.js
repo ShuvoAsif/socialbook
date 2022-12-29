@@ -34,7 +34,7 @@ const Addpost = () => {
 
     const savePost = (caption, img) => {
         const user = { caption, img };
-        fetch('http://localhost:5000/post', {
+        fetch('https://socialbook-server.vercel.app/post', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

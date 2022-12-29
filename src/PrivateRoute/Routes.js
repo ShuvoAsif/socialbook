@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Details from "../pages/Media/Details";
 import Media from "../pages/Media/Media";
 import Signup from "../pages/Signup/Signup";
+import PrivateRoute from "./PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/media',
-                element: <Media></Media>
+                element: <PrivateRoute><Media></Media></PrivateRoute>
             },
             {
                 path: '/about',
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
             {
                 path: '/details/:_id',
                 element: <Details></Details>,
-                loader: ({ params }) => fetch(`http://localhost:5000/posts/${params._id}`)
+                loader: ({ params }) => fetch(`https://socialbook-server.vercel.app/posts/${params._id}`)
 
             },
             {
