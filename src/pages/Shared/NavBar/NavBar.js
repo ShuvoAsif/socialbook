@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
@@ -6,7 +7,17 @@ const NavBar = () => {
 
     const { user, logOut } = useContext(AuthContext);
 
+    const { data: users = [] } = useQuery({
+        queryKey: ['users', user?.email],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/oneuser?email=${user.email}`);
+            const data = await res.json();
+            return data;
+        }
+    })
 
+    const about = users[0]
+    console.log(about)
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -31,7 +42,7 @@ const NavBar = () => {
                         <Link to='/media' className='btn mr-5'>Media</Link>
                     </div>
                     <div className="form-control">
-                        <Link to='/about' className='btn mr-5'>About</Link>
+                        {user ? <Link to='/about' className='btn mr-5'>About</Link> : <></>}
                     </div>
                     <div className="form-control">
                         <Link to='/login' className='mr-5'>
@@ -57,7 +68,7 @@ const NavBar = () => {
                 <div className="mr-5">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img src='' alt='' />
+                            {user ? <img src={about?.image} alt='' /> : <></>}
                         </div>
                     </label>
                 </div>

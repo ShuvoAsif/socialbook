@@ -1,4 +1,5 @@
 import Main from "../Layout/Main";
+import About from "../pages/About/About";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Details from "../pages/Media/Details";
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: '/media',
                 element: <Media></Media>
+            },
+            {
+                path: '/about',
+                element: <About></About>
             },
             {
                 path: '/details/:_id',

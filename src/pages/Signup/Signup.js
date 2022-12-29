@@ -2,29 +2,30 @@ import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Signup = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [signUpError, setSignUPError] = useState('');
     const { createUser, providerLogin, setUser, updateUser } = useContext(AuthContext);
-    /* const [token] = useToken(createdUserEmail);
     const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail);
     const navigate = useNavigate();
-    const location = useLocation();*/
+    const location = useLocation();
 
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 
 
     const googleProvider = new GoogleAuthProvider()
 
-    /* const from = location.state?.from?.pathname || '/';
- 
-     if (token) {
-         navigate(from, { replace: true });
-     }*/
+    const from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
 
 
@@ -41,8 +42,7 @@ const Signup = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        const role = "buyer";
-                        saveUser(user.name, user.email, role);
+                        saveUser(user.name, user.email);
                     })
                     .catch(err => console.log(err));
             })
@@ -50,9 +50,7 @@ const Signup = () => {
     }
 
     const handleSignUp = (data) => {
-
-
-        const image = data.image;
+        const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
@@ -65,6 +63,7 @@ const Signup = () => {
                 if (imgData.success) {
                     console.log(imgData.data.url);
                     saveUser(data.name, data.university, data.address, data.email, imgData.data.url);
+                    toast('Your Account Created Successfully.')
                 }
             })
         console.log(data);
@@ -73,7 +72,6 @@ const Signup = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast('Your Account Created Successfully.')
                 const userInfo = {
                     displayName: data.name
                 }
@@ -102,7 +100,7 @@ const Signup = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // setCreatedUserEmail(email);
+                setCreatedUserEmail(email);
             })
     }
 

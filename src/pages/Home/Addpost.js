@@ -12,7 +12,7 @@ const Addpost = () => {
     const handlePost = (data) => {
 
 
-        const image = data.image;
+        const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
@@ -29,12 +29,11 @@ const Addpost = () => {
             })
         console.log(data);
         setError('');
-        toast('Your Post Uploaded Successfully.')
     }
 
 
-    const savePost = (caption, image) => {
-        const user = { caption, image };
+    const savePost = (caption, img) => {
+        const user = { caption, img };
         fetch('http://localhost:5000/post', {
             method: 'POST',
             headers: {
@@ -45,6 +44,7 @@ const Addpost = () => {
             .then(res => res.json())
             .then(data => {
             })
+        toast('Your Post Uploaded Successfully.')
 
     }
     return (

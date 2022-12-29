@@ -13,7 +13,7 @@ const Details = () => {
                 <figure><img src={img} className="w-80 " alt="Album" /></figure>
                 <div className="card-body">
                     <h2 className="card-title font-bold">User: {name}</h2>
-                    <p className='font-bold'>{caption}</p>
+                    <p className='font-bold'>Caption: {caption}</p>
                     <p className='font-bold'>Total Liked:{likes.length}</p>
                     <div className='font-bold'>Likes:
                         {
