@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Postcard = ({ post }) => {
+const Postcard = ({ post, setId }) => {
 
     const { _id, name, caption, img } = post;
     const isLiked = false
@@ -15,7 +15,11 @@ const Postcard = ({ post }) => {
                 <figure><img src={img ? img : <></>} alt="" /></figure>
                 <div className="card-actions justify-around py-3">
                     {isLiked === false ? <button className="btn btn-primary font-bold">Like</button> : <button className="btn btn-primary font-bold">Unlike</button>}
-                    <button className="btn btn-primary font-bold">Comment</button>
+                    <label
+                        onClick={() => setId(_id)}
+                        htmlFor="booking-modal"
+                        className="btn btn-primary font-bold"
+                    >Comment</label>
                     <Link to={`/details/${_id}`} className="btn btn-primary font-bold">Details</Link>
                 </div>
             </div>
