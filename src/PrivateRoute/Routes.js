@@ -1,6 +1,7 @@
 import Main from "../Layout/Main";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
+import Details from "../pages/Media/Details";
 import Media from "../pages/Media/Media";
 import Signup from "../pages/Signup/Signup";
 
@@ -19,6 +20,12 @@ const router = createBrowserRouter([
             {
                 path: '/media',
                 element: <Media></Media>
+            },
+            {
+                path: '/details/:_id',
+                element: <Details></Details>,
+                loader: ({ params }) => fetch(`http://localhost:5000/posts/${params._id}`)
+
             },
             {
                 path: '/login',
