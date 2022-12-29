@@ -17,8 +17,8 @@ const CommentModal = ({ id, setId }) => {
         }
 
 
-        fetch('https://5000/comment', {
-            method: 'POST',
+        fetch('http://localhost:5000/comment', {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },

@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Postcard = ({ post, setId }) => {
 
-    const { _id, name, caption, img } = post;
-    const isLiked = false
+    const { user } = useContext(AuthContext);
+    const { _id, name, caption, img, likes } = post;
+    const [isLiked, setisLiked] = useState(false);
+
+
+
+
+
     return (
         <div className='py-5 pl-3'>
             <div className="card w-96 bg-sky-700 shadow-xl">
