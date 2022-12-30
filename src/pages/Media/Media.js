@@ -31,6 +31,7 @@ const Media = () => {
                 id &&
                 <PrivateRoute>
                     <CommentModal
+                        id={id}
                         setId={setId}
                     ></CommentModal>
                 </PrivateRoute>

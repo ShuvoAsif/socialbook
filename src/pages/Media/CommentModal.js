@@ -13,11 +13,10 @@ const CommentModal = ({ id, setId }) => {
         const comment = {
             email,
             com,
-            id
         }
 
 
-        fetch('https://socialbook-server.vercel.app/comment', {
+        fetch(`http://localhost:5000/comment/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -29,7 +28,7 @@ const CommentModal = ({ id, setId }) => {
                 console.log(data);
                 if (data.acknowledged) {
                     setId(null);
-                    toast.success('Booking confirmed');
+                    toast.success('Comment Done');
                 }
                 else {
                     toast.error(data.message);
