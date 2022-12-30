@@ -16,7 +16,7 @@ const CommentModal = ({ id, setId }) => {
         }
 
 
-        fetch(`http://localhost:5000/comment/${id}`, {
+        fetch(`https://socialbook-server.vercel.app/comment/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

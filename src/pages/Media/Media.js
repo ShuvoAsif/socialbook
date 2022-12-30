@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../context/AuthProvider';
 import PrivateRoute from '../../PrivateRoute/PrivateRoute';
 import CommentModal from './CommentModal';
 import Postcard from './Postcard';
 
 const Media = () => {
     const [id, setId] = useState(null);
+    const { user } = useContext(AuthContext);
 
     const { data: posts = [] } = useQuery({
         queryKey: ['posts'],
@@ -15,6 +17,19 @@ const Media = () => {
             return data;
         }
     });
+    const mail = user?.email
+    const { data: users = [], refetch } = useQuery({
+        queryKey: ['mail', mail],
+        queryFn: async (user) => {
+            const res = await fetch(`https://socialbook-server.vercel.app/islike?email=${mail}`);
+            const data = await res.json();
+            return data;
+        }
+    })
+    console.log(users)
+    const islikes = users[0]
+    console.log(islikes)
+    refetch(user);
 
     return (
         <section>
@@ -22,6 +37,7 @@ const Media = () => {
                 {
                     posts.map(post => <Postcard
                         key={post._id}
+                        islikes={islikes}
                         post={post}
                         setId={setId}
                     ></Postcard>)

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import PrivateRoute from '../../PrivateRoute/PrivateRoute';
 
 const Addpost = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -65,7 +66,7 @@ const Addpost = () => {
                             <input type="file" {...register("image")} className="input input-bordered w-full max-w-xs" />
                             {errors.img && <p className='text-red-500'>{errors.img.message}</p>}
                         </div>
-                        <input className='btn w-full' value="Post" type="submit" />
+                        <PrivateRoute><input className='btn w-full' value="Post" type="submit" /></PrivateRoute>
                         <div>
                             {Error && <p className='text-red-700'>{Error}</p>}
                         </div>

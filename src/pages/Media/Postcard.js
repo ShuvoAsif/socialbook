@@ -1,15 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthProvider';
 
-const Postcard = ({ post, setId }) => {
+const Postcard = ({ post, setId, islikes }) => {
 
-    const { user } = useContext(AuthContext);
-    const { _id, name, caption, img, likes } = post;
-    const [isLiked, setisLiked] = useState(false);
-
-
-
+    const { _id, name, caption, img } = post;
 
 
     return (
@@ -21,7 +15,8 @@ const Postcard = ({ post, setId }) => {
                 </div>
                 <figure><img src={img ? img : <></>} alt="" /></figure>
                 <div className="card-actions justify-around py-3">
-                    {isLiked === false ? <button className="btn btn-primary font-bold">Like</button> : <button className="btn btn-primary font-bold">Unlike</button>}
+                    {islikes?.liked === false ? <button className="btn btn-primary font-bold">Like</button> : <></>}
+                    {islikes?.liked === true ? <button className="btn btn-primary font-bold">Liked</button> : <></>}
                     <label
                         onClick={() => setId(_id)}
                         htmlFor="booking-modal"
